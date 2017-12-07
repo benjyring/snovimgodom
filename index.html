@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>С Новым Годом</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,400italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+
+<body>
+	<canvas id="interactive-snow"></canvas>
+	<canvas id="fireworks" style="display: none;"></canvas>
+	<div class="container">
+		<div class="front-container">
+			<div class="row">
+				<div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4 col-lg-offset-2 col-lg-4 imgarea">
+					<div class="row">
+						<img src="img/snovimgodom.svg" id="snovimgodom">
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-4 textarea">
+					<h4 class="row">
+						<span class="col-md-4">•счастья•</span>
+						<span class="col-md-4">•здоровья•</span>
+						<span class="col-md-4">•любви•</span>
+					</h4>
+					<div class="row">
+						<div class="flip">
+							<div class="front">
+								<div class="col-md-12">
+									<div id="countdown"></div>
+									<a class="gamelink" href="http://www.game-game.com.ua/75734/" style="display: none;">Ded Moroz Game</a>
+								</div>
+							</div>
+							<div class="back">
+								<p class="col-md-12" id="poem">
+								Уходит старый год,<br>
+								Шуршит его последняя страница.<br>
+								Пусть лучшее, что было, не уйдет,<br>
+								А худшее – не сможет повториться!
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="background">
+		<audio src="audio/Blestnyashiye.mp3"></audio>
+	</div>
+
+	<!-- SCRIPTS -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.extras.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/noise.js"></script>
+	<script src="js/fireworks.js"></script>
+	<script type="text/javascript">
+		$("#countdown").countdown("2017/01/01", function(event) {
+		// $("#countdown").countdown("2016/12/27 18:57:00", function(event) {
+			$(this).html(
+				event.strftime('<span>%D дней<\/span><br><span>%H:%M:%S<\/span>')
+			);
+		}).on('finish.countdown', function(event) {
+			$(this).html('С Новым Годом').parent().addClass('disabled');
+			$('#interactive-snow').hide();
+			$('#fireworks').show();
+			$('audio')[0].play();
+			$('.gamelink').show('slow');
+		});
+		$(".flip").flip({trigger: 'click'});
+	</script>
+	<script src="js/interactive-snow.js"></script>
+</body>
+</html>
